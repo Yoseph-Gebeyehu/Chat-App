@@ -1,6 +1,8 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/components/custom_text_field.dart';
+import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   void Function()? onTap;
@@ -14,6 +16,31 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  // sign up user
+  void signUp() async {
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password don\'t match!'),
+        ),
+      );
+      return;
+    }
+    // get auth service
+    final authService = Provider.of<AuthService>(context, listen: false);
+
+    try {
+      await authService.signUpWithEmailAndPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 25),
                 //signin button
-                CustomButton(onTap: () {}, text: 'Sign Up'),
+                CustomButton(onTap: signUp, text: 'Sign Up'),
                 const SizedBox(height: 50),
                 // not a member? register now
 

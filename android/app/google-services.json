@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119890044690",
+    "project_id": "authentication-7684e",
+    "storage_bucket": "authentication-7684e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119890044690:android:f950f82ed960fe13f075cb",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119890044690-hv0jkca0bc2mfe3on8u1uishasakmbdu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFg8R30MmJ0s9CnRQX2jHLjzG5NEuTM5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119890044690-hv0jkca0bc2mfe3on8u1uishasakmbdu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
