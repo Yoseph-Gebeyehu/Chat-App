@@ -1,9 +1,9 @@
+import 'package:chat_app/pages/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:intl/intl.dart'; // Import the intl package
 
-import '../services/auth/auth_service.dart';
 import 'chat_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,26 +16,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // instance of auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  // sign user out
-  void signOut() {
-    // get auth service
-    final authService = Provider.of<AuthService>(context, listen: false);
-    authService.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-        actions: [
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
+    Size deviceSize = MediaQuery.of(context).size;
+    return RefreshIndicator(
+      onRefresh: () async {
+        _buildUserListItem;
+      },
+      child: Scaffold(
+        drawer: Drawer(
+          child: CustomDrawer(
+            email: _auth.currentUser!.email!,
           ),
-        ],
+        ),
+        appBar: AppBar(
+          title: const Text('Chat App'),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(deviceSize.height * 0.03),
+            child: const Divider(),
+          ),
+        ),
+        body: _buildUserList(),
       ),
-      body: _buildUserList(),
     );
   }
 
@@ -61,24 +64,57 @@ class _HomePageState extends State<HomePage> {
 
   // build individual user list items
   Widget _buildUserListItem(DocumentSnapshot document) {
+    Size deviceSize = MediaQuery.of(context).size;
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+    DateTime now = DateTime.now();
+    DateTime exampleDate =
+        DateTime.parse(data['lastLogin'] ?? DateTime.now().toString());
 
-    // display all users execept current user
+    // Format the date based on whether it's today or not
+    String formattedDateTime;
+    if (now.day == exampleDate.day &&
+        now.month == exampleDate.month &&
+        now.year == exampleDate.year) {
+      // Format as time if the date is today
+      formattedDateTime = DateFormat('h:mm a').format(exampleDate);
+    } else {
+      // Format as 'MMM dd' if the date is not today
+      formattedDateTime = DateFormat('MMM dd').format(exampleDate);
+    }
+
+    // display all users except current user
     if (_auth.currentUser!.email != data['email']) {
-      return ListTile(
-        title: Text(data['email']),
-        onTap: () {
-          // pass the clicked user's UID to the chat page
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiveUserEmail: data['email'],
-                receivedUserID: data['uid'],
-              ),
+      return Column(
+        children: [
+          ListTile(
+            leading: CircleAvatar(
+              radius: 25,
+              child: Text(data['email'][0].toString().toUpperCase()),
             ),
-          );
-        },
+            title: Text(data['email']),
+            subtitle: Text(
+              data['uid'],
+              style: const TextStyle(color: Colors.grey),
+            ),
+            trailing: Text(formattedDateTime), // Use the formatted date
+            onTap: () {
+              // pass the clicked user's UID to the chat page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                    receiveUserEmail: data['email'],
+                    receivedUserID: data['uid'],
+                  ),
+                ),
+              );
+            },
+          ),
+          Divider(
+            indent: deviceSize.width * 0.15,
+            color: Colors.grey.withOpacity(0.1),
+          ),
+        ],
       );
     } else {
       return Container();
