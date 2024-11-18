@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
     return RefreshIndicator(
+      color: Theme.of(context).primaryColorDark,
       onRefresh: () async {
         _buildUserListItem;
       },
@@ -31,13 +32,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         appBar: AppBar(
-          title: const Text('Chat App'),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(deviceSize.height * 0.03),
-            child: const Divider(),
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          title: const Text(
+            'Chat App',
+            style: TextStyle(color: Colors.black),
           ),
+          backgroundColor: Theme.of(context).primaryColor,
+          toolbarHeight: deviceSize.height * 0.09,
         ),
-        body: _buildUserList(),
+        body: Container(
+          color: Colors.white,
+          child: _buildUserList(),
+        ),
       ),
     );
   }
@@ -87,9 +95,16 @@ class _HomePageState extends State<HomePage> {
       return Column(
         children: [
           ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              child: Text(data['email'][0].toString().toUpperCase()),
+            leading: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColorDark),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 25,
+                child: Text(data['email'][0].toString().toUpperCase()),
+              ),
             ),
             title: Text(data['email']),
             subtitle: Text(

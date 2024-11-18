@@ -45,19 +45,19 @@ class _ChatPageState extends State<ChatPage> {
         elevation: 0,
         scrolledUnderElevation: 0,
         toolbarHeight: deviceSize.height * 0.09,
-        backgroundColor: Theme.of(context).primaryColorDark,
+        backgroundColor: Theme.of(context).primaryColor,
         // backgroundColor: const Color(0xfff9ead4),
 
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColorDark),
         title: Text(
           widget.receiveUserEmail,
           style: TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColorDark,
           ),
         ),
       ),
       body: Container(
-        color: Theme.of(context).primaryColor,
+        color: Colors.white,
         child: Column(
           children: [
             // Messages
