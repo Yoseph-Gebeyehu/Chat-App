@@ -20,10 +20,19 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  Widget build(
+    BuildContext context,
+  ) {
+    return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xfffdf9f5),
+        primaryColor: const Color(0xfffaf6f1),
+        primaryColorDark: const Color.fromARGB(255, 164, 98, 17),
+        fontFamily: 'Arima',
+      ),
       debugShowCheckedModeBanner: false,
-      home: AuthGate(),
+      home: const AuthGate(),
     );
   }
 }

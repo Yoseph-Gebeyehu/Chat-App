@@ -36,18 +36,55 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
+    Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiveUserEmail),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        // backgroundColor: Theme.of(context).primaryColorDark,
+        backgroundColor: const Color(0xfff9ead4),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(deviceSize.height * 0.035),
+          child: Divider(
+            color: Theme.of(context).primaryColorDark,
+            thickness: 0.2,
+          ),
+        ),
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColorDark),
+        title: Text(
+          widget.receiveUserEmail,
+          style: TextStyle(
+            color: Theme.of(context).primaryColorDark,
+          ),
+        ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // messages
-          Expanded(child: _buildMessageList()),
+          Opacity(
+            opacity: 0.1,
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/background.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          // Chat content on top of the background image
+          Column(
+            children: [
+              // Messages
+              Expanded(child: _buildMessageList()),
 
-          // user input
-          _buildMessageInput(),
+              // User input
+              _buildMessageInput(),
+            ],
+          ),
         ],
       ),
     );
@@ -80,8 +117,8 @@ class _ChatPageState extends State<ChatPage> {
   // build message item
 
   Widget _buildMessageItem(DocumentSnapshot document) {
+    Size deviceSize = MediaQuery.of(context).size;
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-
     // align the messages to the right if the sender is the current user, otherwise to the left
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
@@ -90,8 +127,17 @@ class _ChatPageState extends State<ChatPage> {
       alignment: alignment,
       child: Column(
         children: [
-          Text(data['senderEmail']),
-          ChatBubble(message: data['message']),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: deviceSize.width * 0.02,
+              vertical: 5,
+            ),
+            child: ChatBubble(
+              isUser: data['senderId'] == _firebaseAuth.currentUser!.uid,
+              message: data['message'],
+              data: data,
+            ),
+          ),
         ],
       ),
     );
