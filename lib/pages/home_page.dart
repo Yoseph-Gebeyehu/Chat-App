@@ -59,7 +59,11 @@ class _HomePageState extends State<HomePage> {
           return const Text('error');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('Loading...');
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColorDark,
+            ),
+          );
         }
         return ListView(
           children: snapshot.data!.docs
