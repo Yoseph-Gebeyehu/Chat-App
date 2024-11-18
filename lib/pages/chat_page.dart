@@ -1,5 +1,5 @@
 import 'package:chat_app/components/chat_bubble.dart';
-import 'package:chat_app/components/custom_text_field.dart';
+import 'package:chat_app/components/custom_send_field.dart';
 import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,52 +40,33 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0,
         scrolledUnderElevation: 0,
-        // backgroundColor: Theme.of(context).primaryColorDark,
-        backgroundColor: const Color(0xfff9ead4),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(deviceSize.height * 0.035),
-          child: Divider(
-            color: Theme.of(context).primaryColorDark,
-            thickness: 0.2,
-          ),
-        ),
-        iconTheme: IconThemeData(color: Theme.of(context).primaryColorDark),
+        toolbarHeight: deviceSize.height * 0.09,
+        backgroundColor: Theme.of(context).primaryColorDark,
+        // backgroundColor: const Color(0xfff9ead4),
+
+        iconTheme: IconThemeData(color: Theme.of(context).primaryColor),
         title: Text(
           widget.receiveUserEmail,
           style: TextStyle(
-            color: Theme.of(context).primaryColorDark,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Opacity(
-            opacity: 0.1,
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/background.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          // Chat content on top of the background image
-          Column(
-            children: [
-              // Messages
-              Expanded(child: _buildMessageList()),
+      body: Container(
+        color: Theme.of(context).primaryColor,
+        child: Column(
+          children: [
+            // Messages
+            Expanded(child: _buildMessageList()),
 
-              // User input
-              _buildMessageInput(),
-            ],
-          ),
-        ],
+            // User input
+            _buildMessageInput(),
+          ],
+        ),
       ),
     );
   }
@@ -146,25 +127,29 @@ class _ChatPageState extends State<ChatPage> {
   // build message input
 
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        // textfield
-        Expanded(
-          child: CustomTextField(
-            controller: _messageController,
-            hintText: 'Enter message',
-            obscureText: false,
-          ),
-        ),
-        // send button
-        IconButton(
-          onPressed: sendMessage,
-          icon: const Icon(
-            Icons.arrow_upward,
-            size: 40,
-          ),
-        ),
-      ],
+    return CustomSendField(
+      messageController: _messageController,
+      onTap: sendMessage,
     );
+    // Row(
+    //   children: [
+    //     // textfield
+    //     Expanded(
+    //       child: CustomTextField(
+    //         controller: _messageController,
+    //         hintText: 'Enter message',
+    //         obscureText: false,
+    //       ),
+    //     ),
+    //     // send button
+    //     IconButton(
+    //       onPressed: sendMessage,
+    //       icon: const Icon(
+    //         Icons.arrow_upward,
+    //         size: 40,
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 }
