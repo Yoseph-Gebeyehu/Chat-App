@@ -4,6 +4,7 @@ import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class RegisterPage extends StatefulWidget {
   void Function()? onTap;
   RegisterPage({super.key, required this.onTap});

@@ -57,14 +57,17 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.grey,
               width: 0.2,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.0),
-            borderSide: BorderSide(color: Theme.of(context).primaryColorDark),
+            borderSide: BorderSide(
+              color: Theme.of(context).primaryColorDark,
+              width: 0.3,
+            ),
           ),
           hintText: hintText,
           fillColor: Colors.white,

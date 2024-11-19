@@ -1,6 +1,7 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/components/custom_text_field.dart';
 import 'package:chat_app/google_service.dart';
+import 'package:chat_app/pages/forgot_password.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:chat_app/square_tile.dart';
 import 'package:flutter/material.dart';
@@ -22,17 +23,19 @@ class _LoginPageState extends State<LoginPage> {
   // sign in user
   void signIn() async {
     // get the auth service
-    final authService = Provider.of<AuthService>(context, listen: false);
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      final authService = Provider.of<AuthService>(context, listen: false);
 
-    try {
-      await authService.signInWithEmailandPassword(
-        emailController.text,
-        passwordController.text,
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      try {
+        await authService.signInWithEmailandPassword(
+          emailController.text,
+          passwordController.text,
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     }
   }
 
@@ -64,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SizedBox(height: deviceSize.height * 0.02),
                     Image.asset(
-                      'assets/Bible_AI.png',
+                      'assets/chat.png',
                       height: deviceSize.height * 0.22,
                       fit: BoxFit.cover,
                     ),
@@ -94,8 +97,11 @@ class _LoginPageState extends State<LoginPage> {
                         alignment: Alignment.topRight,
                         child: InkWell(
                           onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => ForgotPasswordPage()));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordPage(),
+                              ),
+                            );
                           },
                           child: Text(
                             'Forgot Password?',
