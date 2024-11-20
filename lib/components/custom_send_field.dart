@@ -60,23 +60,6 @@ class _CustomSendFieldState extends State<CustomSendField> {
       ),
       child: Row(
         children: [
-          // Container(
-          //   padding: const EdgeInsets.all(10),
-          //   decoration: BoxDecoration(
-          //     color: const Color.fromARGB(255, 241, 221, 195),
-          //     borderRadius: BorderRadius.circular(50),
-          //     border: Border.all(
-          //       color: Theme.of(context).primaryColorDark,
-          //       width: 0.1,
-          //     ),
-          //   ),
-          //   child: Icon(
-          //     Icons.add,
-          //     size: 30,
-          //     color: Theme.of(context).primaryColorDark,
-          //   ),
-          // ),
-          // const SizedBox(width: 10),
           Expanded(
             child: TextField(
               maxLines: 4,
@@ -118,7 +101,7 @@ class _CustomSendFieldState extends State<CustomSendField> {
               ),
               child: Center(
                 child: Icon(
-                  Icons.arrow_upward,
+                  Icons.send,
                   color: Theme.of(context).primaryColor,
                 ),
               ),
