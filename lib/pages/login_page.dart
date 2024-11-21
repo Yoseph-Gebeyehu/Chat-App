@@ -33,7 +33,22 @@ class _LoginPageState extends State<LoginPage> {
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
+          SnackBar(
+            backgroundColor: Theme.of(context).primaryColorDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            content: Text(
+              e.toString(),
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 15,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
         );
       }
     }
@@ -96,18 +111,26 @@ class _LoginPageState extends State<LoginPage> {
                       child: Align(
                         alignment: Alignment.topRight,
                         child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => ForgotPasswordPage(),
+                                builder: (context) =>
+                                    const ForgotPasswordPage(),
                               ),
                             );
                           },
-                          child: Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColorDark,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
                             ),
                           ),
                         ),
@@ -135,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: EdgeInsets.symmetric(
                               horizontal: deviceSize.width * 0.05,
                             ),
-                            child: Text('Or continue with'),
+                            child: const Text('Or continue with'),
                           ),
                           Expanded(
                             child: Divider(
@@ -171,15 +194,21 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.grey[700],
                           ),
                         ),
-                        SizedBox(width: deviceSize.width * 0.02),
                         InkWell(
+                          borderRadius: BorderRadius.circular(10),
                           onTap: widget.onTap,
-                          child: Text(
-                            'Register now',
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColorDark,
-                              fontSize: deviceSize.width * 0.036,
-                              fontWeight: FontWeight.bold,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            child: Text(
+                              'Register now',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorDark,
+                                fontSize: deviceSize.width * 0.036,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -202,72 +231,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-
-    // return Scaffold(
-    //   body: SafeArea(
-    //     child: Center(
-    //       child: Padding(
-    //         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             const SizedBox(height: 50),
-    //             // logo
-    //             Icon(
-    //               Icons.message,
-    //               size: 100,
-    //               color: Colors.grey[800],
-    //             ),
-    //             // welcome back message
-    //             const Text(
-    //               'Welcome back you\'ve been missed!',
-    //               style: TextStyle(fontSize: 16),
-    //             ),
-    //             const SizedBox(height: 25),
-    //             //email
-    //             CustomTextField(
-    //               controller: emailController,
-    //               hintText: 'Email',
-    //               obscureText: false,
-    //             ),
-    //             const SizedBox(height: 10),
-    //             // password textfield
-    //             CustomTextField(
-    //               controller: passwordController,
-    //               hintText: 'Password',
-    //               obscureText: true,
-    //             ),
-    //             const SizedBox(height: 25),
-    //             //signin button
-    //             CustomButton(
-    //                 onTap: () {
-    //                   signIn();
-    //                 },
-    //                 text: 'Sign in'),
-    //             const SizedBox(height: 50),
-    //             // not a member? register now
-
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               children: [
-    //                 const Text('Not a member?'),
-    //                 const SizedBox(width: 4),
-    //                 GestureDetector(
-    //                   onTap: widget.onTap,
-    //                   child: const Text(
-    //                     'Register',
-    //                     style: TextStyle(
-    //                       fontWeight: FontWeight.bold,
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

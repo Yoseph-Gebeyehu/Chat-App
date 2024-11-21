@@ -52,12 +52,13 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       child: InkWell(
+        borderRadius: BorderRadius.circular(8),
         onTap: onTap,
         child: Center(
           child: Text(
             text,
             style: TextStyle(
-              color: Color.fromARGB(255, 164, 98, 17),
+              color: const Color.fromARGB(255, 164, 98, 17),
               fontWeight: FontWeight.bold,
               fontSize: deviceSize.width * 0.04,
             ),

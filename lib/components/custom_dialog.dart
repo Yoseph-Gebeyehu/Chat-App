@@ -30,7 +30,7 @@ class CustomDialog {
                 Text(
                   title,
                   style: TextStyle(
-                    color: Color.fromARGB(255, 202, 151, 75),
+                    color: Theme.of(context).primaryColorDark,
                     fontSize: deviceSize.width * 0.05,
                     fontWeight: FontWeight.bold,
                     fontFamily:
@@ -49,10 +49,10 @@ class CustomDialog {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: deviceSize.height * 0.02),
-                const Divider(
+                Divider(
                   height: 1,
                   thickness: 0.5,
-                  color: Color.fromARGB(255, 202, 151, 75),
+                  color: Theme.of(context).primaryColorDark,
                 ),
                 IntrinsicHeight(
                   child: Row(
@@ -82,9 +82,9 @@ class CustomDialog {
                           ),
                         ),
                       ),
-                      const VerticalDivider(
+                      VerticalDivider(
                         thickness: 0.5,
-                        color: Color.fromARGB(255, 202, 151, 75),
+                        color: Theme.of(context).primaryColorDark,
                       ),
                       Expanded(
                         child: TextButton(
@@ -99,7 +99,7 @@ class CustomDialog {
                             confirmBtnText ?? 'Ok',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 202, 151, 75),
+                              color: Theme.of(context).primaryColorDark,
                               fontFamily: Theme.of(context)
                                   .textTheme
                                   .bodyLarge!
@@ -212,8 +212,7 @@ class CustomDialog {
               Text(
                 title,
                 style: TextStyle(
-                  color: Color.fromARGB(
-                      255, 76, 175, 80), // Green color for success
+                  color: const Color.fromARGB(255, 76, 175, 80),
                   fontSize: deviceSize.width * 0.04,
                   fontWeight: FontWeight.w600,
                   fontFamily: Theme.of(context).textTheme.bodyLarge!.fontFamily,
@@ -248,7 +247,7 @@ class CustomDialog {
                   child: Text(
                     'Ok',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 76, 175, 80),
+                      color: const Color.fromARGB(255, 76, 175, 80),
                       fontFamily:
                           Theme.of(context).textTheme.bodyLarge!.fontFamily,
                     ),

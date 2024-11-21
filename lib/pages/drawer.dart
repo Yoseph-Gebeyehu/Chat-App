@@ -50,7 +50,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                 ),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: Column(
                     children: [

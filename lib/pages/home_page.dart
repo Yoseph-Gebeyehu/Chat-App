@@ -32,17 +32,28 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         appBar: AppBar(
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: Divider(
+              height: 1,
+              thickness: 0.5,
+              indent: 0,
+              endIndent: 0,
+              color: Color(0xFF4B2D2D),
+            ),
+          ),
           elevation: 0,
           scrolledUnderElevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Color(0xFF4B2D2D)),
           title: const Text(
             'Chat App',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Color(0xFF4B2D2D)),
           ),
           backgroundColor: Theme.of(context).primaryColor,
           toolbarHeight: deviceSize.height * 0.09,
         ),
         body: Container(
+          padding: const EdgeInsets.only(top: 15),
           color: Colors.white,
           child: _buildUserList(),
         ),

@@ -41,9 +41,11 @@ class ChatBubble extends StatelessWidget {
                 color: Theme.of(context).primaryColorDark,
                 width: 0.1,
               ),
-              color: isUser ? const Color(0xfff9ead4) : Colors.white,
+              color: isUser
+                  ? const Color(0xfff9ead4)
+                  : Theme.of(context).primaryColor,
             ),
-            child: Text(
+            child: SelectableText(
               message,
               style: TextStyle(
                 fontSize: 16,

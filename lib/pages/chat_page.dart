@@ -46,26 +46,57 @@ class _ChatPageState extends State<ChatPage> {
         elevation: 0,
         scrolledUnderElevation: 0,
         toolbarHeight: deviceSize.height * 0.09,
-        // backgroundColor: Theme.of(context).primaryColor,
-        backgroundColor: const Color(0xfff9ead4),
-
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: Theme.of(context).primaryColor,
+        // backgroundColor: const Color(0xFFf0c0bf),
+        // backgroundColor: const Color(0xfff9ead4),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.more_vert,
+              color: Color(0xFF4B2D2D),
+            ),
+          )
+        ],
+        iconTheme: const IconThemeData(color: Color(0xFF4B2D2D)),
         title: Text(
           widget.receiveUserEmail.split('@')[0],
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: Color(0xFF4B2D2D)),
+        ),
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Divider(
+            height: 1,
+            thickness: 0.5,
+            indent: 0,
+            endIndent: 0,
+            color: Color(0xFF4B2D2D),
+          ),
         ),
       ),
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            // Messages
-            Expanded(child: _buildMessageList()),
-
-            // User input
-            _buildMessageInput(),
-          ],
-        ),
+      body: Stack(
+        children: [
+          // Background image
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.1,
+              child: Image.asset(
+                'assets/image.png',
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ),
+          // Foreground content
+          Container(
+            color: Colors.white.withOpacity(0.5),
+            child: Column(
+              children: [
+                Expanded(child: _buildMessageList()),
+                _buildMessageInput(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
