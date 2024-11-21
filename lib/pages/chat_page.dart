@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiveUserEmail;
@@ -103,6 +104,7 @@ class _ChatPageState extends State<ChatPage> {
 
   // build message list
   // build message list
+  // build message list
   Widget _buildMessageList() {
     return StreamBuilder(
       stream: _chatService.getMessages(
@@ -111,13 +113,31 @@ class _ChatPageState extends State<ChatPage> {
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return Center(
+            child: Text('Error: ${snapshot.error}'),
+          );
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(
               color: Theme.of(context).primaryColorDark,
             ),
+          );
+        }
+
+        // Check if the snapshot has data and if it's empty
+        if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+          return Column(
+            children: [
+              Lottie.asset(
+                fit: BoxFit.cover,
+                'assets/empty_text.json',
+              ),
+              const Text(
+                'There is no chat history yet!',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
           );
         }
 
@@ -140,7 +160,6 @@ class _ChatPageState extends State<ChatPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Date separator row
-
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
@@ -173,6 +192,7 @@ class _ChatPageState extends State<ChatPage> {
       },
     );
   }
+
   // build message item
 
   Widget _buildMessageItem(DocumentSnapshot document) {
