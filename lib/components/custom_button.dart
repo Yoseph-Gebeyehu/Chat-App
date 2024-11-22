@@ -44,10 +44,11 @@ class CustomButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 25),
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.transparent,
+        // color: Colors.transparent,
+        color: Theme.of(context).primaryColorDark,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).primaryColorDark,
+          color: Theme.of(context).primaryColor,
           width: 0.2,
         ),
       ),
@@ -58,7 +59,8 @@ class CustomButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color: const Color.fromARGB(255, 164, 98, 17),
+              // color: const Color.fromARGB(255, 164, 98, 17),
+              color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
               fontSize: deviceSize.width * 0.04,
             ),

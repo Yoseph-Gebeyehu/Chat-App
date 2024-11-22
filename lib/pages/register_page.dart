@@ -166,7 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: EdgeInsets.symmetric(
                               horizontal: deviceSize.width * 0.05,
                             ),
-                            child: Text('Or continue with'),
+                            child: const Text('Or continue with'),
                           ),
                           Expanded(
                             child: Divider(
