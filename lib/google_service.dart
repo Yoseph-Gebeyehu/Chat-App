@@ -4,8 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 class GoogleService {
   // Google Sign-In with prompt for account selection
   Future<UserCredential?> signInWithGoogle() async {
-    print('Attempting Google Sign-In');
-
     // Configure GoogleSignIn to request email scope
     final googleSignIn = GoogleSignIn(scopes: ['email']);
 
@@ -32,7 +30,6 @@ class GoogleService {
       // Sign in with the new credential
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } catch (e) {
-      print("Error during Google Sign-In: $e");
       return null;
     }
   }
