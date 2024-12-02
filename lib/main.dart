@@ -51,6 +51,19 @@ void main() async {
     String payloadData = jsonEncode(message.data);
   });
 
+  // to handle foreground notifications
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    String payloadData = jsonEncode(message.data);
+    print("Got a message in foreground");
+    if (message.notification != null) {
+      PushNotifications.showSimpleNotification(
+        title: message.notification!.title!,
+        body: message.notification!.body!,
+        payload: payloadData,
+      );
+    }
+  });
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => AuthService(),
