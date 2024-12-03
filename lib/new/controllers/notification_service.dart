@@ -1,4 +1,6 @@
 import 'package:chat_app/main.dart';
+import 'package:chat_app/new/controllers/auth_service.dart';
+import 'package:chat_app/new/controllers/crud_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -18,9 +20,26 @@ class PushNotifications {
       provisional: false,
       sound: true,
     );
-    // get the device fcm token
+  }
+
+  static Future getDeviceToken() async {
     final token = await _firebaseMessaging.getToken();
     print("device token: $token");
+
+    bool isUserLoggedIn = await AuthNewService.isLoggedIn();
+
+    if (isUserLoggedIn) {
+      await CrudService.saveUserToken(token!);
+      print('save to firestore');
+    }
+
+    // also save if token changes
+    _firebaseMessaging.onTokenRefresh.listen((event) async {
+      if (isUserLoggedIn) {
+        await CrudService.saveUserToken(token!);
+        print('save to firestore');
+      }
+    });
   }
 
   // initialize local notification
