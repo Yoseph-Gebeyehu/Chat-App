@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/new/controllers/auth_service.dart';
 import 'package:chat_app/new/controllers/notification_service.dart';
-import 'package:chat_app/new/views/login_page.dart';
-import 'package:chat_app/new/views/message.dart';
-import 'package:chat_app/new/views/signup_page.dart';
-import 'package:chat_app/new/views/home_page.dart';
+// import 'package:chat_app/new/views/login_page.dart';
+// import 'package:chat_app/new/views/message.dart';
+// import 'package:chat_app/new/views/signup_page.dart';
+// import 'package:chat_app/new/views/home_page.dart';
+import 'package:chat_app/services/auth/auth_gate.dart';
 // import 'package:chat_app/services/auth/auth_gate.dart';
 import 'package:chat_app/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -90,7 +91,7 @@ class MyApp extends StatelessWidget {
     BuildContext context,
   ) {
     return MaterialApp(
-      navigatorKey: navigatorKey,
+      // navigatorKey: navigatorKey,
       theme: ThemeData(
         brightness: Brightness.light,
         scaffoldBackgroundColor: const Color(0xFFf0c0bf),
@@ -99,15 +100,15 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Arima',
       ),
       debugShowCheckedModeBanner: false,
-      // home: const AuthGate(),
+      home: const AuthGate(),
 
-      routes: {
-        "/": (context) => const CheckUser(),
-        "/login": (context) => const LoginPage(),
-        "/signup": (context) => const SignupPage(),
-        "/home": (context) => const HomePage(),
-        "/message": (context) => const MessagePage(),
-      },
+      // routes: {
+      //   "/": (context) => const CheckUser(),
+      //   "/login": (context) => const LoginPage(),
+      //   "/signup": (context) => const SignupPage(),
+      //   "/home": (context) => const HomePage(),
+      //   "/message": (context) => const MessagePage(),
+      // },
     );
   }
 }

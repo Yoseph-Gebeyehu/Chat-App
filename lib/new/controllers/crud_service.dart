@@ -1,4 +1,4 @@
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+// import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +18,7 @@ class CrudService {
           .doc(user.uid)
           .set(data);
 
-      printToConsole("Document added to ${user.uid}");
+      print("Document added to ${user.uid}");
     } catch (e) {
       print('error in saving to firestore');
       print(e.toString());
