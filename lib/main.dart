@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/new/controllers/auth_service.dart';
 import 'package:chat_app/new/controllers/notification_service.dart';
+import 'package:chat_app/search_anchor.dart';
 // import 'package:chat_app/new/views/login_page.dart';
 // import 'package:chat_app/new/views/message.dart';
 // import 'package:chat_app/new/views/signup_page.dart';
@@ -25,56 +26,55 @@ Future _firebaseBackgroundMessage(RemoteMessage message) async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
-  // initialize firebase messaging
-  await PushNotifications.init();
+  // // initialize firebase messaging
+  // await PushNotifications.init();
 
-  // initialize local notification
-  await PushNotifications.localNotInit();
+  // // initialize local notification
+  // await PushNotifications.localNotInit();
 
-  // Listen to background notification
-  FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessage);
+  // // Listen to background notification
+  // FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessage);
 
-  // on background notification tapped
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    if (message.notification != null) {
-      print('Background Notification tapped in');
-      navigatorKey.currentState!.pushNamed("/message", arguments: message);
-    }
-  });
+  // // on background notification tapped
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   if (message.notification != null) {
+  //     print('Background Notification tapped in');
+  //     navigatorKey.currentState!.pushNamed("/message", arguments: message);
+  //   }
+  // });
 
-  // on background notification tapped
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    String payloadData = jsonEncode(message.data);
-  });
+  // // on background notification tapped
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   String payloadData = jsonEncode(message.data);
+  // });
 
-  // to handle foreground notifications
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    String payloadData = jsonEncode(message.data);
-    print("Got a message in foreground");
-    if (message.notification != null) {
-      PushNotifications.showSimpleNotification(
-        title: message.notification!.title!,
-        body: message.notification!.body!,
-        payload: payloadData,
-      );
-    }
-  });
+  // // to handle foreground notifications
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   String payloadData = jsonEncode(message.data);
+  //   print("Got a message in foreground");
+  //   if (message.notification != null) {
+  //     PushNotifications.showSimpleNotification(
+  //       title: message.notification!.title!,
+  //       body: message.notification!.body!,
+  //       payload: payloadData,
+  //     );
+  //   }
+  // });
 
-  // for handling in terminated state
-  final RemoteMessage? message =
-      await FirebaseMessaging.instance.getInitialMessage();
-  if (message != null) {
-    print('Launched from terminated state');
-    Future.delayed(Duration(seconds: 1), () {
-      navigatorKey.currentState!.pushNamed("/message", arguments: message);
-    });
-  }
-
+  // // for handling in terminated state
+  // final RemoteMessage? message =
+  //     await FirebaseMessaging.instance.getInitialMessage();
+  // if (message != null) {
+  //   print('Launched from terminated state');
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     navigatorKey.currentState!.pushNamed("/message", arguments: message);
+  //   });
+  // }
   runApp(
     ChangeNotifierProvider(
       create: (context) => AuthService(),
@@ -100,7 +100,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Arima',
       ),
       debugShowCheckedModeBanner: false,
-      home: const AuthGate(),
+      // home: const AuthGate(),
+      home: GoodsSearch(),
 
       // routes: {
       //   "/": (context) => const CheckUser(),
