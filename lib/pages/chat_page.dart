@@ -80,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
           // Background image
           Positioned.fill(
             child: Opacity(
-              opacity: 0.1,
+              opacity: 0.05,
               child: Image.asset(
                 'assets/image.png',
                 fit: BoxFit.fitHeight,
@@ -208,7 +208,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: deviceSize.width * 0.02,
+              horizontal: deviceSize.width * 0.05,
               vertical: 5,
             ),
             child: ChatBubble(
