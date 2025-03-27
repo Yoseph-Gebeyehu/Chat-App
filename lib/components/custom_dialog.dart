@@ -212,7 +212,7 @@ class CustomDialog {
               Text(
                 title,
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 76, 175, 80),
+                  color: Theme.of(context).primaryColorDark,
                   fontSize: deviceSize.width * 0.04,
                   fontWeight: FontWeight.w600,
                   fontFamily: Theme.of(context).textTheme.bodyLarge!.fontFamily,
@@ -247,7 +247,7 @@ class CustomDialog {
                   child: Text(
                     'Ok',
                     style: TextStyle(
-                      color: const Color.fromARGB(255, 76, 175, 80),
+                      color: Theme.of(context).primaryColorDark,
                       fontFamily:
                           Theme.of(context).textTheme.bodyLarge!.fontFamily,
                     ),

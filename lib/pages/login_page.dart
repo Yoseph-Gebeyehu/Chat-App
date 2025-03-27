@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // sign in user
   void signIn() async {
+    print('yes ');
     // get the auth service
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       final authService = Provider.of<AuthService>(context, listen: false);
@@ -31,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
           emailController.text,
           passwordController.text,
         );
+        Navigator.pushReplacementNamed(context, '/home');
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -61,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
 
     await GoogleService().signInWithGoogle();
     setState(() => isLoading = false);
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override

@@ -34,6 +34,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     // get auth service
     final authService = Provider.of<AuthService>(context, listen: false);
     authService.signOut();
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override
@@ -82,7 +83,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     desc: 'Are you sure to log out?',
                     onConfirm: () {
                       signOut();
-                      Navigator.of(context).pop();
                     },
                     onCancel: () {
                       Navigator.of(context).pop();
